@@ -39,14 +39,10 @@ func CreateEngine() *engine {
 }
 
 func (e *engine) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-
-	// push to driver handler
 	e.router.driver.ServeHTTP(w, r)
 }
 
 func (e *engine) Use(mware ...Middleware) {
-
-	// add middleware to global stack
 	e.mware = append(e.mware, mware...)
 }
 
@@ -73,7 +69,5 @@ func (e *engine) Listen(h string, p string) error {
 }
 
 func (e *engine) HandleRoutes(routes []Route) {
-
-	// push to router
 	e.router.handleRoutes(routes)
 }

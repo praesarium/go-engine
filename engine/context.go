@@ -6,17 +6,16 @@ import (
 )
 
 type Context struct {
-	Route	string
+	Route		string
 	Params  httprouter.Params
 	Request *http.Request
 	Writer  writerInterface
 
-	// unexported values
-	mware  []Middleware
-	engine *engine
-	store  map[string]interface{}
-	index  int8
-	abort  bool
+	mware		[]Middleware
+	engine	*engine
+	store		map[string]interface{}
+	index		int8
+	abort		bool
 }
 
 func createContext(
@@ -46,14 +45,10 @@ func createContext(
 }
 
 func (c *Context) recycle() {
-
-	// send context back to engine pool
 	c.engine.pooler.Put(c)
 }
 
 func (c *Context) Render(status int, driver Renderer, data interface{}) error {
-
-	// run plugable render driver
 	return driver.Render(c.Writer, status, data)
 }
 
@@ -90,8 +85,6 @@ func (c *Context) NextMiddleware() {
 }
 
 func (c *Context) Parse(driver Parser, data interface{}) error {
-
-	// run plugable parse driver
 	return driver.Parse(c.Request, data)
 }
 
