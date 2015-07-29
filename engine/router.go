@@ -8,10 +8,10 @@ import (
 type (
 
 	Route struct {
-		Middleware	[]Middleware
-		Method			string
-		Pattern			string
-		Name 				string
+		Middleware []Middleware
+		Method     string
+		Pattern    string
+		Name       string
 	}
 
 	router struct {
@@ -33,9 +33,9 @@ func (h *handlerNoMethod) ServeHTTP(writer http.ResponseWriter, request *http.Re
 		h.engine, writer, request, nil, h.engine.mware, "no_method",
 	)
 
-  ctx.Writer.WriteHeader(http.StatusMethodNotAllowed)
-  ctx.NextMiddleware()
-  ctx.recycle()
+	ctx.Writer.WriteHeader(http.StatusMethodNotAllowed)
+	ctx.NextMiddleware()
+	ctx.recycle()
 }
 
 func (h *handlerNoRoute) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
@@ -43,9 +43,9 @@ func (h *handlerNoRoute) ServeHTTP(writer http.ResponseWriter, request *http.Req
 		h.engine, writer, request, nil, h.engine.mware, "no_route",
 	)
 
-  ctx.Writer.WriteHeader(http.StatusNotFound)
-  ctx.NextMiddleware()
-  ctx.recycle()
+	ctx.Writer.WriteHeader(http.StatusNotFound)
+	ctx.NextMiddleware()
+	ctx.recycle()
 }
 
 func createRouter(e *engine) *router {

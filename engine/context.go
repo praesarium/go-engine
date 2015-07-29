@@ -6,26 +6,29 @@ import (
 )
 
 type Context struct {
-	Route		string
+
+	// public variables
+	Route   string
 	Params  httprouter.Params
 	Request *http.Request
 	Writer  writerInterface
 
-	mware		[]Middleware
-	engine	*engine
-	store		map[string]interface{}
-	index		int8
-	abort		bool
+	// private variables
+	mware  []Middleware
+	engine *engine
+	store  map[string]interface{}
+	index  int8
+	abort  bool
 }
 
 func createContext(
 
-	engine 	*engine,
-	writer 	http.ResponseWriter,
+	engine  *engine,
+	writer  http.ResponseWriter,
 	request *http.Request,
-	params 	httprouter.Params,
-	mware 	[]Middleware,
-	route 	string,
+	params  httprouter.Params,
+	mware   []Middleware,
+	route   string,
 
 ) *Context {
 
@@ -55,7 +58,6 @@ func (c *Context) Render(status int, driver Renderer, data interface{}) error {
 func (c *Context) GetValue(k string) interface{} {
 
 	if c.store != nil {
-
 		value, ok := c.store[k]
 		if ok {
 			return value
@@ -89,7 +91,6 @@ func (c *Context) Parse(driver Parser, data interface{}) error {
 }
 
 func (c *Context) Abort(status int) {
-
 	c.Writer.WriteHeader(status)
 	c.abort = true
 }

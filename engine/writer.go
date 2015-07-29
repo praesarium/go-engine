@@ -5,7 +5,6 @@ import "net/http"
 type (
 
 	writerInterface interface {
-
 		http.ResponseWriter
 		Done() bool
 		Size() int
@@ -13,7 +12,6 @@ type (
 	}
 
 	writer struct {
-
 		http.ResponseWriter
 		size int
 		code int

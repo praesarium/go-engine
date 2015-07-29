@@ -23,9 +23,9 @@ var (
 
 func (_ parserJSON) Parse(req *http.Request, data interface{}) error {
 
-    // decode request body
-    dec := json.NewDecoder(req.Body)
-    err := dec.Decode(data)
+	// decode request body
+	dec := json.NewDecoder(req.Body)
+	err := dec.Decode(data)
 
 	return err
 }
